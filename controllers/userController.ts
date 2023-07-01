@@ -1,13 +1,15 @@
 import {userModel} from "../models/userModel";
 
 const getUserByEmailIdAndPassword = (email: string, password: string) => {
-  let user = userModel.findOne(email);
-  if (user) {
+  //any function that throws an error needs to be wrapped in a try catch. but don't wrap it here
+    let user = userModel.findOne(email);
+
     if (isUserValid(user, password)) {
       return user;
     }
-  }
-  return null;
+    else{
+      throw(new Error(`The username and password you entered are incorrect.`))
+    }
 };
 const getUserById = (id:any) => {
   let user = userModel.findById(id);
